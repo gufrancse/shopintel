@@ -5,42 +5,39 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(
-    name = "products",
+    name = "categories",
     indexes = {
-        @Index(name = "idx_product_name", columnList = "name"),
-        @Index(name = "idx_product_brand", columnList = "brand")
+        @Index(name = "idx_category_name", columnList = "name"),
+        @Index(name = "idx_category_slug", columnList = "slug")
     }
 )
-public class Product {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(length = 100)
-    private String brand;
+    @Column(nullable = false, unique = true, length = 120)
+    private String slug;
 
-    @Column(length = 100)
-    private String modelNumber;
-
-    @Column(columnDefinition = "TEXT")
+    @Column(length = 500)
     private String description;
-
-    @Column(length = 100)
-    private String productType;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    private Category category;
 
     @Column(length = 1000)
     private String imageUrl;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
+    private Category parentCategory;
+
     @Column(nullable = false)
     private Boolean active = true;
+
+    @Column(nullable = false)
+    private Integer displayOrder = 0;
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -48,7 +45,7 @@ public class Product {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    public Product() {
+    public Category() {
     }
 
     @PrePersist
@@ -79,20 +76,12 @@ public class Product {
         this.name = name;
     }
 
-    public String getBrand() {
-        return brand;
+    public String getSlug() {
+        return slug;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getModelNumber() {
-        return modelNumber;
-    }
-
-    public void setModelNumber(String modelNumber) {
-        this.modelNumber = modelNumber;
+    public void setSlug(String slug) {
+        this.slug = slug;
     }
 
     public String getDescription() {
@@ -103,14 +92,6 @@ public class Product {
         this.description = description;
     }
 
-    public String getProductType() {
-        return productType;
-    }
-
-    public void setProductType(String productType) {
-        this.productType = productType;
-    }
-
     public String getImageUrl() {
         return imageUrl;
     }
@@ -119,12 +100,12 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
-    public Category getCategory() {
-        return category;
+    public Category getParentCategory() {
+        return parentCategory;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setParentCategory(Category parentCategory) {
+        this.parentCategory = parentCategory;
     }
 
     public Boolean getActive() {
@@ -135,6 +116,14 @@ public class Product {
         this.active = active;
     }
 
+    public Integer getDisplayOrder() {
+        return displayOrder;
+    }
+
+    public void setDisplayOrder(Integer displayOrder) {
+        this.displayOrder = displayOrder;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -142,5 +131,4 @@ public class Product {
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
-    
 }
