@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.shopintel.backend.dto.ProductUpdateRequestDTO;
+import com.shopintel.backend.exception.BadRequestException;
+import com.shopintel.backend.dto.PageResponseDTO;
 
 
 import java.util.List;
@@ -37,6 +39,34 @@ public class ProductController {
     public List<ProductResponseDTO> getAllProducts() {
         return productService.getAllProducts();
     }
+
+   @GetMapping("/search")
+    public PageResponseDTO<ProductResponseDTO> searchProducts(
+            @RequestParam(required = false) String q,
+            @RequestParam(required = false) String brand,
+            @RequestParam(required = false) String category,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "createdAt,desc") String sort
+    ) {
+
+        if (page < 0) {
+            throw new BadRequestException("Page cannot be negative");
+        }
+
+        if (size < 1 || size > 100) {
+            throw new BadRequestException("Size must be between 1 and 100");
+        }
+
+        return productService.searchProducts(
+            q,
+            brand,
+            category,
+            page,
+            size,
+            sort
+        );
+    }   
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponseDTO> getProductById(
