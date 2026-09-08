@@ -74,18 +74,44 @@ export default function HeroSearch() {
       <form onSubmit={handleSubmit}>
         <div
           className="
-            group flex min-h-[68px] items-center
+            group relative flex min-h-[68px] items-center
             rounded-2xl border border-gray-200
             bg-white/85 p-2 pl-5
             shadow-[0_18px_55px_rgba(17,19,24,0.10)]
             backdrop-blur-xl
-            transition-all duration-300
+            transition-all duration-300 ease-out
+            hover:-translate-y-0.5
+            hover:border-gray-300
+            hover:shadow-[0_22px_60px_rgba(17,19,24,0.12)]
             focus-within:-translate-y-1
             focus-within:border-gray-300
-            focus-within:shadow-[0_24px_65px_rgba(17,19,24,0.14)]
+            focus-within:shadow-[0_26px_70px_rgba(17,19,24,0.15)]
           "
         >
-          <span className="mr-3 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-500">
+          {/* Subtle focus glow */}
+          <div
+            aria-hidden="true"
+            className="
+              pointer-events-none absolute inset-0 -z-10
+              rounded-2xl bg-white
+              opacity-0 blur-2xl
+              transition-opacity duration-300
+              group-focus-within:opacity-70
+            "
+          />
+
+          <span
+            className="
+              mr-3 flex h-10 w-10 shrink-0
+              items-center justify-center
+              rounded-xl bg-gray-100 text-gray-500
+              transition-all duration-300
+              group-hover:bg-gray-50
+              group-hover:text-gray-700
+              group-focus-within:bg-gray-100
+              group-focus-within:text-gray-800
+            "
+          >
             <SearchIcon />
           </span>
 
@@ -114,15 +140,25 @@ export default function HeroSearch() {
               rounded-xl bg-[#111318]
               text-white
               shadow-sm
-              transition-all duration-300
-              hover:scale-[1.03]
+              transition-all duration-300 ease-out
+              hover:scale-[1.05]
               hover:bg-[#24262d]
+              hover:shadow-[0_8px_20px_rgba(17,19,24,0.18)]
+              active:scale-95
               disabled:cursor-not-allowed
               disabled:opacity-40
               disabled:hover:scale-100
+              disabled:hover:shadow-sm
             "
           >
-            <ArrowIcon />
+            <span
+              className="
+                transition-transform duration-300
+                group-hover:translate-x-0.5
+              "
+            >
+              <ArrowIcon />
+            </span>
           </button>
         </div>
       </form>
@@ -142,10 +178,13 @@ export default function HeroSearch() {
               rounded-full border border-gray-200/80
               bg-white/55 px-3 py-1.5
               text-[11px] font-medium text-gray-500
-              transition-all duration-200
+              transition-all duration-200 ease-out
+              hover:-translate-y-0.5
               hover:border-gray-300
               hover:bg-white
               hover:text-gray-800
+              hover:shadow-[0_5px_15px_rgba(17,19,24,0.07)]
+              active:translate-y-0
             "
           >
             {item}

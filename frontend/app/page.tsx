@@ -55,9 +55,81 @@ export default function Home() {
           }}
         />
 
+        {/* Controlled depth layer */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 hidden overflow-hidden lg:block"
+        >
+          {/* Left depth orb */}
+          <div
+            className="
+              shopintel-float
+              absolute left-[7%] top-[22%]
+              h-28 w-28 rounded-full
+              border border-white/70
+              bg-white/35
+              shadow-[0_25px_70px_rgba(17,19,24,0.08)]
+              backdrop-blur-md
+            "
+            style={{
+              animationDelay: "-1.5s",
+            }}
+          />
+
+          {/* Right depth orb */}
+          <div
+            className="
+              shopintel-float
+              absolute right-[9%] top-[34%]
+              h-20 w-20 rounded-full
+              border border-white/70
+              bg-white/30
+              shadow-[0_20px_60px_rgba(17,19,24,0.07)]
+              backdrop-blur-md
+            "
+            style={{
+              animationDelay: "-3s",
+            }}
+          />
+
+          {/* Small depth card */}
+          <div
+            className="
+              shopintel-float
+              absolute right-[17%] top-[18%]
+              h-14 w-20
+              rounded-2xl
+              border border-white/70
+              bg-white/35
+              shadow-[0_20px_50px_rgba(17,19,24,0.06)]
+              backdrop-blur-md
+            "
+            style={{
+              animationDelay: "-2.2s",
+            }}
+          />
+
+          {/* Small depth dot */}
+          <div
+            className="
+              shopintel-float
+              absolute left-[18%] top-[45%]
+              h-5 w-5 rounded-full
+              bg-white/60
+              shadow-[0_10px_30px_rgba(17,19,24,0.08)]
+            "
+            style={{
+              animationDelay: "-4s",
+            }}
+          />
+        </div>
+
         <div className="container-shopintel text-center">
           {/* Eyebrow */}
-          <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-gray-200/80 bg-white/65 px-3.5 py-2 text-xs font-medium text-gray-600 shadow-sm backdrop-blur-md">
+          <div
+            className="shopintel-fade-up mb-7 inline-flex items-center gap-2 rounded-full border border-gray-200/80 bg-white/65 px-3.5 py-2 text-xs font-medium text-gray-600 shadow-sm backdrop-blur-md"
+            style={{ animationDelay: "0ms" }}
+          >
             <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#111318] text-[10px] text-white">
               ✦
             </span>
@@ -66,25 +138,36 @@ export default function Home() {
           </div>
 
           {/* Heading */}
-          <h1 className="mx-auto max-w-4xl text-balance text-[48px] font-semibold leading-[0.98] tracking-[-0.065em] text-[#111318] sm:text-[64px] lg:text-[82px]">
+          <h1
+            className="shopintel-fade-up mx-auto max-w-4xl text-balance text-[48px] font-semibold leading-[0.98] tracking-[-0.065em] text-[#111318] sm:text-[64px] lg:text-[82px]"
+            style={{ animationDelay: "100ms" }}
+          >
             Find smarter.
             <br />
             <span className="text-gray-400">Pay less. Buy better.</span>
           </h1>
 
           {/* Description */}
-          <p className="mx-auto mt-7 max-w-2xl text-pretty text-[15px] leading-7 text-gray-500 sm:text-base">
+          <p
+            className="shopintel-fade-up mx-auto mt-7 max-w-2xl text-pretty text-[15px] leading-7 text-gray-500 sm:text-base"
+            style={{ animationDelay: "200ms" }}
+          >
             Compare products, prices and offers across stores — then let
             ShopIntel help you decide what&apos;s actually worth buying.
           </p>
-          
-          <HeroSearch />
 
+          {/* Hero Search */}
+          <div
+            className="shopintel-fade-up relative z-10"
+            style={{ animationDelay: "300ms" }}
+          >
+            <HeroSearch />
+          </div>
         </div>
       </section>
 
       {/* Categories */}
-      <section className="px-4 pb-24 sm:px-6 sm:pb-28">
+      <section className="shopintel-fade-up px-4 pb-24 sm:px-6 sm:pb-28">
         <div className="container-shopintel">
           <div className="mb-8 flex items-end justify-between gap-4">
             <div>
@@ -106,11 +189,14 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
-            {categories.map((category) => (
+            {categories.map((category, index) => (
               <Link
                 key={category.name}
                 href={`/search?category=${encodeURIComponent(category.name)}`}
-                className="shopintel-card group min-h-[155px] p-5"
+                className="shopintel-card group min-h-[155px] p-5 shopintel-fade-up"
+                style={{
+                  animationDelay: `${index * 70}ms`,
+                }}
               >
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gray-100 text-lg text-gray-700 transition-all duration-300 group-hover:scale-105 group-hover:bg-[#111318] group-hover:text-white">
                   {category.icon}
@@ -129,81 +215,83 @@ export default function Home() {
         </div>
       </section>
 
-
       {/* Trending searches */}
-      <section className="px-4 pb-24 sm:px-6">
-      <div className="container-shopintel">
-        <div className="mb-8">
-          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-400">
-            Trending searches
-          </p>
+      <section className="shopintel-fade-up px-4 pb-24 sm:px-6">
+        <div className="container-shopintel">
+          <div className="mb-8">
+            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-400">
+              Trending searches
+            </p>
 
-          <h2 className="text-2xl font-semibold tracking-[-0.04em] text-[#111318] sm:text-3xl">
-            What people are comparing
-          </h2>
+            <h2 className="text-2xl font-semibold tracking-[-0.04em] text-[#111318] sm:text-3xl">
+              What people are comparing
+            </h2>
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            {popularSearches.map((search, index) => (
+              <Link
+                key={search}
+                href={`/search?q=${encodeURIComponent(search)}`}
+                className="shopintel-fade-up group inline-flex items-center gap-3 rounded-full border border-gray-200 bg-white px-5 py-3 text-sm font-medium text-gray-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-gray-300 hover:text-[#111318] hover:shadow-md"
+                style={{
+                  animationDelay: `${index * 80}ms`,
+                }}
+              >
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 text-xs text-gray-500 transition-colors group-hover:bg-[#111318] group-hover:text-white">
+                  ↗
+                </span>
+
+                {search}
+              </Link>
+            ))}
+          </div>
         </div>
+      </section>
 
-      <div className="flex flex-wrap gap-3">
-      {popularSearches.map((search) => (
-          <Link
-            key={search}
-            href={`/search?q=${encodeURIComponent(search)}`}
-            className="group inline-flex items-center gap-3 rounded-full border border-gray-200 bg-white px-5 py-3 text-sm font-medium text-gray-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-gray-300 hover:text-[#111318] hover:shadow-md"
-          >
-            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 text-xs text-gray-500 transition-colors group-hover:bg-[#111318] group-hover:text-white">
-              ↗
-            </span>
-
-            {search}
-          </Link>
-        ))}
-      </div>
-    </div>
-  </section>
-
-        {/* Deals */}
-        <section className="px-4 pb-24 sm:px-6">
+      {/* Deals */}
+      <section className="shopintel-fade-up px-4 pb-24 sm:px-6">
         <div className="container-shopintel">
           <div className="mb-8 flex items-end justify-between gap-4">
-      <div>
-        <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-400">
-          Deals
-        </p>
+            <div>
+              <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-400">
+                Deals
+              </p>
 
-        <h2 className="text-2xl font-semibold tracking-[-0.04em] text-[#111318] sm:text-3xl">
-          Deals worth watching
-        </h2>
-      </div>
+              <h2 className="text-2xl font-semibold tracking-[-0.04em] text-[#111318] sm:text-3xl">
+                Deals worth watching
+              </h2>
+            </div>
 
-      <Link
-        href="/deals"
-        className="hidden text-sm font-medium text-gray-500 transition-colors hover:text-[#111318] sm:block"
-      >
-        View all →
-      </Link>
-    </div>
+            <Link
+              href="/deals"
+              className="hidden text-sm font-medium text-gray-500 transition-colors hover:text-[#111318] sm:block"
+            >
+              View all →
+            </Link>
+          </div>
 
-    <div className="rounded-[24px] border border-dashed border-gray-300 bg-white/70 px-6 py-12 text-center sm:px-10">
-      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-100 text-gray-500">
-        ✦
-      </div>
+          <div className="rounded-[24px] border border-dashed border-gray-300 bg-white/70 px-6 py-12 text-center transition-all duration-300 hover:border-gray-400 hover:shadow-[0_15px_45px_rgba(17,19,24,0.06)] sm:px-10">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-100 text-gray-500 transition-transform duration-300 hover:scale-105">
+              ✦
+            </div>
 
-      <h3 className="mt-5 text-lg font-semibold tracking-[-0.02em] text-[#111318]">
-        Smart deals are coming
-      </h3>
+            <h3 className="mt-5 text-lg font-semibold tracking-[-0.02em] text-[#111318]">
+              Smart deals are coming
+            </h3>
 
-      <p className="mx-auto mt-2 max-w-lg text-sm leading-6 text-gray-500">
-        Once store data is connected, ShopIntel will surface price drops,
-        offers and genuinely worthwhile deals here.
-      </p>
-    </div>
-  </div>
-</section>
+            <p className="mx-auto mt-2 max-w-lg text-sm leading-6 text-gray-500">
+              Once store data is connected, ShopIntel will surface price
+              drops, offers and genuinely worthwhile deals here.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Intelligence teaser */}
-      <section className="px-4 pb-24 sm:px-6 sm:pb-32">
+      <section className="shopintel-fade-up px-4 pb-24 sm:px-6 sm:pb-32">
         <div className="container-shopintel">
-          <div className="relative overflow-hidden rounded-[28px] border border-gray-200/80 bg-[#111318] px-6 py-10 text-white shadow-[0_25px_70px_rgba(17,19,24,0.14)] sm:px-10 sm:py-12 lg:px-14">
+          <div className="relative overflow-hidden rounded-[28px] border border-gray-200/80 bg-[#111318] px-6 py-10 text-white shadow-[0_25px_70px_rgba(17,19,24,0.14)] transition-transform duration-500 hover:-translate-y-1 sm:px-10 sm:py-12 lg:px-14">
             <div
               className="pointer-events-none absolute -right-32 -top-40 h-80 w-80 rounded-full opacity-20 blur-3xl"
               style={{
