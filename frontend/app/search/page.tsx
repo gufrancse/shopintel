@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -35,10 +36,8 @@ function SearchResults() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    setQuery(initialQuery);
 
     if (!initialQuery.trim() && !initialCategory.trim()) {
-        setProducts([]);
         return;
     
     }
@@ -327,11 +326,13 @@ function SearchResults() {
                 >
                   <div className="flex aspect-[4/3] items-center justify-center bg-gray-50">
                     {product.imageUrl ? (
-                      <img
+                      <Image
                         src={product.imageUrl}
                         alt={product.name}
+                        width={400}
+                        height={300}
                         className="h-full w-full object-contain p-8"
-                      />
+                        />
                     ) : (
                       <div className="text-sm text-gray-400">
                         No image available

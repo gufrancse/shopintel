@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
@@ -151,11 +152,13 @@ function ProductPage() {
             <div className="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm">
               <div className="flex aspect-square items-center justify-center bg-gray-50">
                 {product.imageUrl ? (
-                  <img
+                  <Image
                     src={product.imageUrl}
                     alt={product.name}
+                    width={700}
+                    height={700}
                     className="h-full w-full object-contain p-10"
-                  />
+                    />
                 ) : (
                   <div className="flex flex-col items-center justify-center text-center">
                     <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-sm">
