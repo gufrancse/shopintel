@@ -1,8 +1,8 @@
 package com.shopintel.backend.integration.amazon;
 
 import com.shopintel.backend.integration.StoreAdapter;
-import com.shopintel.backend.integration.StoreProductData;
 import com.shopintel.backend.integration.StoreSearchRequest;
+import com.shopintel.backend.integration.StoreSearchResponse;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -10,16 +10,27 @@ import java.util.List;
 @Component
 public class AmazonAdapter implements StoreAdapter {
 
-    @Override
-    public String getStoreCode() {
-        return "AMAZON";
+    private final AmazonClient amazonClient;
+
+    public AmazonAdapter(AmazonClient amazonClient) {
+        this.amazonClient = amazonClient;
     }
 
     @Override
-    public List<StoreProductData> search(StoreSearchRequest request) {
+    public String getStoreCode() {
+        return amazonClient.getStoreCode();
+    }
 
-        // Amazon Creators API integration will be added here.
+    @Override
+    public StoreSearchResponse search(StoreSearchRequest request) {
 
-        return List.of();
+        // Amazon API integration will be added here.
+
+        return new StoreSearchResponse(
+                List.of(),
+                request.page(),
+                request.size(),
+                false
+        );
     }
 }

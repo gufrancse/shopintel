@@ -129,6 +129,77 @@ export default function Home() {
         </div>
       </section>
 
+
+      {/* Trending searches */}
+      <section className="px-4 pb-24 sm:px-6">
+      <div className="container-shopintel">
+        <div className="mb-8">
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-400">
+            Trending searches
+          </p>
+
+          <h2 className="text-2xl font-semibold tracking-[-0.04em] text-[#111318] sm:text-3xl">
+            What people are comparing
+          </h2>
+        </div>
+
+      <div className="flex flex-wrap gap-3">
+      {popularSearches.map((search) => (
+          <Link
+            key={search}
+            href={`/search?q=${encodeURIComponent(search)}`}
+            className="group inline-flex items-center gap-3 rounded-full border border-gray-200 bg-white px-5 py-3 text-sm font-medium text-gray-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-gray-300 hover:text-[#111318] hover:shadow-md"
+          >
+            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 text-xs text-gray-500 transition-colors group-hover:bg-[#111318] group-hover:text-white">
+              ↗
+            </span>
+
+            {search}
+          </Link>
+        ))}
+      </div>
+    </div>
+  </section>
+
+        {/* Deals */}
+        <section className="px-4 pb-24 sm:px-6">
+        <div className="container-shopintel">
+          <div className="mb-8 flex items-end justify-between gap-4">
+      <div>
+        <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-400">
+          Deals
+        </p>
+
+        <h2 className="text-2xl font-semibold tracking-[-0.04em] text-[#111318] sm:text-3xl">
+          Deals worth watching
+        </h2>
+      </div>
+
+      <Link
+        href="/deals"
+        className="hidden text-sm font-medium text-gray-500 transition-colors hover:text-[#111318] sm:block"
+      >
+        View all →
+      </Link>
+    </div>
+
+    <div className="rounded-[24px] border border-dashed border-gray-300 bg-white/70 px-6 py-12 text-center sm:px-10">
+      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-100 text-gray-500">
+        ✦
+      </div>
+
+      <h3 className="mt-5 text-lg font-semibold tracking-[-0.02em] text-[#111318]">
+        Smart deals are coming
+      </h3>
+
+      <p className="mx-auto mt-2 max-w-lg text-sm leading-6 text-gray-500">
+        Once store data is connected, ShopIntel will surface price drops,
+        offers and genuinely worthwhile deals here.
+      </p>
+    </div>
+  </div>
+</section>
+
       {/* Intelligence teaser */}
       <section className="px-4 pb-24 sm:px-6 sm:pb-32">
         <div className="container-shopintel">

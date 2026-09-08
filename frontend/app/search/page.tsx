@@ -27,6 +27,7 @@ function SearchResults() {
   const searchParams = useSearchParams();
 
   const initialQuery = searchParams.get("q") ?? "";
+  const initialCategory = searchParams.get("category") ?? "";
 
   const [query, setQuery] = useState(initialQuery);
   const [products, setProducts] = useState<Product[]>([]);
@@ -36,9 +37,10 @@ function SearchResults() {
   useEffect(() => {
     setQuery(initialQuery);
 
-    if (!initialQuery.trim()) {
-      setProducts([]);
-      return;
+    if (!initialQuery.trim() && !initialCategory.trim()) {
+        setProducts([]);
+        return;
+    
     }
 
     const fetchProducts = async () => {
@@ -47,10 +49,12 @@ function SearchResults() {
         setError("");
 
         const response = await fetch(
-        `/api/products/search?q=${encodeURIComponent(
-        initialQuery
-        )}&page=0&size=20`
-    );
+            `/api/products/search?q=${encodeURIComponent(
+                initialQuery
+            )}&category=${encodeURIComponent(
+                initialCategory
+            )}&page=0&size=20`
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch products");
@@ -70,7 +74,7 @@ function SearchResults() {
     };
 
     fetchProducts();
-  }, [initialQuery]);
+    }, [initialQuery, initialCategory]);
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -84,6 +88,15 @@ function SearchResults() {
 
     router.push(`/search?q=${encodeURIComponent(trimmedQuery)}`);
   };
+
+    const handleRemoveCategory = () => {
+    if (initialQuery.trim()) {
+        router.push(`/search?q=${encodeURIComponent(initialQuery.trim())}`);
+        return;
+    }
+
+        router.push("/search");
+    };
 
   return (
     <main className="min-h-screen">
@@ -141,15 +154,30 @@ function SearchResults() {
           </form>
 
           {/* Query */}
-          {initialQuery && (
+          {(initialQuery || initialCategory) && (
             <div className="mb-6 flex items-center justify-between gap-4">
               <div>
-                <p className="text-sm text-gray-500">Search results for</p>
-
+                <p className="text-sm text-gray-500">
+                    {initialCategory ? "Products in category" : "Search results for"}
+                </p>
+                    
                 <h2 className="mt-1 text-2xl font-semibold text-gray-950">
-                  “{initialQuery}”
+                        “{initialCategory || initialQuery}”
                 </h2>
-              </div>
+                {initialCategory && (
+                <button
+                type="button"
+                onClick={handleRemoveCategory}
+                className="mt-3 inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5 text-xs font-medium text-gray-600 transition hover:border-gray-300 hover:bg-white hover:text-gray-950"
+                >
+                {initialCategory}
+
+                <span aria-hidden="true" className="text-sm leading-none">
+                ×
+                </span>
+                </button>
+            )}
+            </div>
 
               {!loading && !error && (
                 <p className="text-sm text-gray-500">
@@ -361,7 +389,7 @@ function SearchResults() {
           )}
 
           {/* No query */}
-          {!initialQuery && (
+          {!initialQuery && !initialCategory && (
             <div className="rounded-2xl border border-dashed border-gray-300 bg-white/70 p-12 text-center">
               <h2 className="text-xl font-semibold text-gray-950">
                 Start your search

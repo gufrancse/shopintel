@@ -16,6 +16,7 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
 
     const query = searchParams.get("q") ?? "";
+    const category = searchParams.get("category") ?? "";
     const page = searchParams.get("page") ?? "0";
     const size = searchParams.get("size") ?? "20";
 
@@ -24,6 +25,7 @@ export async function GET(request: NextRequest) {
     );
 
     backendUrl.searchParams.set("q", query);
+    backendUrl.searchParams.set("category", category);
     backendUrl.searchParams.set("page", page);
     backendUrl.searchParams.set("size", size);
 

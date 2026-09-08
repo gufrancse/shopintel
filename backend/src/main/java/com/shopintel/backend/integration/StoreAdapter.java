@@ -6,5 +6,5 @@ public interface StoreAdapter {
 
     String getStoreCode();
 
-    List<StoreProductData> search(StoreSearchRequest request);
+    StoreSearchResponse search(StoreSearchRequest request);
 }

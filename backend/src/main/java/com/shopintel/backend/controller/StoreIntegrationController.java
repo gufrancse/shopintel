@@ -3,9 +3,8 @@ package com.shopintel.backend.controller;
 import com.shopintel.backend.integration.StoreIntegrationService;
 import com.shopintel.backend.integration.StoreProductData;
 import com.shopintel.backend.integration.StoreSearchRequest;
+import com.shopintel.backend.integration.StoreSearchResponse;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/integration")
@@ -20,7 +19,7 @@ public class StoreIntegrationController {
     }
 
     @GetMapping("/stores/{storeCode}/search")
-    public List<StoreProductData> searchStore(
+    public StoreSearchResponse searchStore(
             @PathVariable String storeCode,
             @RequestParam String q,
             @RequestParam(defaultValue = "0") int page,

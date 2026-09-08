@@ -2,7 +2,6 @@ package com.shopintel.backend.integration;
 
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class StoreIntegrationService {
@@ -15,7 +14,7 @@ public class StoreIntegrationService {
         this.storeAdapterRegistry = storeAdapterRegistry;
     }
 
-    public List<StoreProductData> searchStore(
+    public StoreSearchResponse searchStore(
             String storeCode,
             StoreSearchRequest request
     ) {
